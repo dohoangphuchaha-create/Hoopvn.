@@ -1,0 +1,1096 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>HoopVN – Website Bóng Rổ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--or:#FF6B00;--or2:#cc5500;--bk:#121212;--dk:#1a1a1a;--dk2:#222;--gr:#2e2e2e;--gr2:#444;--lg:#aaa;--wh:#fff;--card:#1e1e1e;--rad:10px;--sh:0 4px 20px rgba(255,107,0,.15)}
+html{scroll-behavior:smooth}
+body{background:var(--bk);color:var(--wh);font-family:'Inter',sans-serif;font-size:16px;line-height:1.6}
+a{text-decoration:none;color:inherit;transition:color .2s}
+ul{list-style:none}
+img{width:100%;display:block;object-fit:cover}
+h1,h2,h3,h4{font-family:'Montserrat',sans-serif;font-weight:700;line-height:1.2}
+.con{max-width:1200px;margin:0 auto;padding:0 1.5rem}
+.sec{padding:3rem 0}
+.btn{display:inline-flex;align-items:center;gap:.4rem;padding:.65rem 1.4rem;border-radius:50px;font-family:'Montserrat',sans-serif;font-weight:600;font-size:.9rem;cursor:pointer;border:none;transition:all .25s;white-space:nowrap}
+.btn-p{background:var(--or);color:#fff}.btn-p:hover{background:var(--or2);transform:translateY(-2px);box-shadow:0 6px 20px rgba(255,107,0,.4)}
+.btn-o{background:transparent;color:var(--or);border:2px solid var(--or)}.btn-o:hover{background:var(--or);color:#fff;transform:translateY(-2px)}
+.btn-g{background:var(--gr);color:#fff}.btn-g:hover{background:var(--gr2)}
+.sec-title{font-family:'Montserrat',sans-serif;font-size:clamp(1.2rem,2.5vw,1.7rem);font-weight:900;text-transform:uppercase;letter-spacing:1px;margin-bottom:1.5rem;display:flex;align-items:center;gap:.6rem}
+.sec-title::before{content:'';display:inline-block;width:5px;height:1.4em;background:var(--or);border-radius:3px;flex-shrink:0}
+/* NAVBAR */
+.nav{position:sticky;top:0;z-index:1000;background:rgba(18,18,18,.96);backdrop-filter:blur(10px);border-bottom:1px solid var(--gr);padding:.9rem 0}
+.nav .con{display:flex;align-items:center;gap:1.5rem}
+.nav-logo{font-family:'Montserrat',sans-serif;font-weight:900;font-size:1.4rem;flex-shrink:0}.nav-logo span{color:var(--or)}
+.nav-links{display:flex;align-items:center;gap:.2rem;flex:1;flex-wrap:wrap}
+.nav-links a{padding:.45rem .85rem;border-radius:8px;font-weight:500;font-size:.88rem;color:var(--lg);transition:all .2s}
+.nav-links a:hover,.nav-links a.active{color:var(--or);background:var(--gr)}
+.nav-r{display:flex;align-items:center;gap:.8rem;margin-left:auto}
+.sb{display:flex;align-items:center;background:var(--dk2);border:1px solid var(--gr);border-radius:50px;padding:.4rem 1rem;gap:.5rem;transition:border-color .2s}
+.sb:focus-within{border-color:var(--or)}
+.sb input{background:none;border:none;outline:none;color:#fff;font-size:.85rem;width:140px}.sb input::placeholder{color:var(--lg)}
+.mnav-toggle{display:none;background:none;border:none;color:#fff;font-size:1.5rem;cursor:pointer}
+/* MOBILE NAV */
+.mnav{display:none;position:fixed;inset:0;z-index:2000;background:rgba(0,0,0,.7)}
+.mnav.open{display:block}
+.mnav-in{position:absolute;right:0;top:0;bottom:0;width:260px;background:var(--dk);padding:1.5rem;display:flex;flex-direction:column;gap:.4rem}
+.mnav-in .cls{align-self:flex-end;background:none;border:none;color:#fff;font-size:1.8rem;cursor:pointer;margin-bottom:1rem}
+.mnav-in a{padding:.8rem 1rem;border-radius:8px;font-weight:500;color:var(--lg);transition:all .2s}
+.mnav-in a:hover,.mnav-in a.active{background:var(--gr);color:var(--or)}
+/* PAGES */
+.page{display:none}.page.active{display:block}
+/* HERO */
+.hero{position:relative;min-height:500px;display:flex;align-items:center;overflow:hidden;background:linear-gradient(135deg,#1a0a00,var(--bk) 60%)}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 70% 50%,rgba(255,107,0,.18),transparent 65%);pointer-events:none}
+.hero-bg{position:absolute;right:-2rem;top:50%;transform:translateY(-50%);font-family:'Montserrat',sans-serif;font-weight:900;font-size:clamp(7rem,16vw,16rem);color:rgba(255,107,0,.04);user-select:none;white-space:nowrap}
+.hero .con{position:relative;z-index:1;display:grid;grid-template-columns:1fr 1fr;gap:2rem;align-items:center;padding:3rem 1.5rem}
+.hero-tag{display:inline-block;background:var(--or);color:#fff;font-family:'Montserrat',sans-serif;font-weight:700;font-size:.72rem;letter-spacing:2px;text-transform:uppercase;padding:.3rem .9rem;border-radius:50px;margin-bottom:.8rem}
+.hero-title{font-weight:900;font-size:clamp(1.8rem,4vw,3rem);margin-bottom:.8rem}.hero-title span{color:var(--or)}
+.hero-desc{color:var(--lg);font-size:.95rem;margin-bottom:1.5rem;max-width:440px}
+.hero-actions{display:flex;gap:.8rem;flex-wrap:wrap}
+.hero-ball{font-size:clamp(7rem,13vw,13rem);animation:bnc 2s infinite ease-in-out;filter:drop-shadow(0 0 40px rgba(255,107,0,.5));text-align:center}
+@keyframes bnc{0%,100%{transform:translateY(0)}50%{transform:translateY(-18px)}}
+/* STATS */
+.stats{background:var(--dk2);border-bottom:1px solid var(--gr);padding:1rem 0}
+.stats .con{display:flex;justify-content:space-around;flex-wrap:wrap;gap:1rem}
+.stat-n{font-family:'Montserrat',sans-serif;font-weight:900;font-size:1.6rem;color:var(--or)}
+.stat-l{font-size:.78rem;color:var(--lg);margin-top:.1rem}
+/* CHIPS & FILTERS */
+.chips{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:1.5rem}
+.chip{padding:.35rem .9rem;border-radius:50px;font-size:.82rem;font-weight:500;cursor:pointer;border:1px solid var(--gr);background:var(--dk2);color:var(--lg);transition:all .2s}
+.chip:hover,.chip.on{border-color:var(--or);color:var(--or);background:rgba(255,107,0,.1)}
+.fbar{display:flex;align-items:center;gap:.8rem;flex-wrap:wrap;margin-bottom:1.5rem}
+.fsel{background:var(--dk2);border:1px solid var(--gr);color:#fff;padding:.45rem 2rem .45rem .9rem;border-radius:8px;font-family:'Inter',sans-serif;font-size:.88rem;cursor:pointer;outline:none;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23aaa' stroke-width='2' fill='none'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right .7rem center;transition:border-color .2s}
+.fsel:focus{border-color:var(--or)}
+/* VIDEO GRID */
+.vgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.3rem}
+.vcard{background:var(--card);border-radius:var(--rad);overflow:hidden;border:1px solid var(--gr);cursor:pointer;transition:transform .25s,box-shadow .25s,border-color .25s}
+.vcard:hover{transform:translateY(-5px);box-shadow:var(--sh);border-color:var(--or)}
+.vthumb{position:relative;aspect-ratio:16/9;background:var(--gr);overflow:hidden}
+.vplay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.4);opacity:0;transition:opacity .2s}
+.vcard:hover .vplay{opacity:1}
+.vplay svg{width:50px;height:50px}
+.vdur{position:absolute;bottom:.5rem;right:.5rem;background:rgba(0,0,0,.85);color:#fff;font-size:.72rem;font-weight:600;padding:.1rem .4rem;border-radius:4px}
+.vbadge{position:absolute;top:.5rem;left:.5rem;background:var(--or);color:#fff;font-size:.68rem;font-weight:700;text-transform:uppercase;padding:.1rem .4rem;border-radius:4px}
+.vinfo{padding:.85rem 1rem}
+.vtitle{font-family:'Montserrat',sans-serif;font-size:.9rem;font-weight:600;color:#fff;margin-bottom:.4rem;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.vmeta{display:flex;align-items:center;justify-content:space-between;font-size:.78rem;color:var(--lg)}
+.vlike{display:flex;align-items:center;gap:.3rem;cursor:pointer;transition:color .2s}
+.vlike:hover,.vlike.on{color:#e53935}
+/* NEWS GRID */
+.ngrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.4rem}
+.ncard{background:var(--card);border-radius:var(--rad);overflow:hidden;border:1px solid var(--gr);transition:transform .25s,border-color .25s;display:flex;flex-direction:column;cursor:pointer}
+.ncard:hover{transform:translateY(-4px);border-color:var(--or)}
+.nthumb{aspect-ratio:16/9;background:var(--gr);overflow:hidden}
+.nbody{padding:.9rem 1rem 1rem;flex:1;display:flex;flex-direction:column}
+.ncat{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--or);margin-bottom:.4rem}
+.ntitle{font-family:'Montserrat',sans-serif;font-size:.93rem;font-weight:700;margin-bottom:.4rem;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.nexc{font-size:.82rem;color:var(--lg);flex:1;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;margin-bottom:.8rem}
+.nfoot{display:flex;align-items:center;justify-content:space-between;font-size:.76rem;color:var(--lg)}
+/* PLACEHOLDER */
+.ph{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--dk2),var(--gr));color:var(--lg);font-size:2.2rem;gap:.3rem}
+.ph span{font-size:.72rem}
+/* PAGE HERO */
+.phero{background:linear-gradient(180deg,rgba(255,107,0,.1),transparent);padding:2rem 0 1.2rem;border-bottom:1px solid var(--gr);margin-bottom:1.8rem}
+.phero h1{font-weight:900;font-size:clamp(1.5rem,3vw,2.3rem)}
+.phero p{color:var(--lg);font-size:.9rem;margin-top:.3rem}
+/* ARTICLE MODAL */
+.modal-bg{display:none;position:fixed;inset:0;z-index:3000;background:rgba(0,0,0,.85);overflow-y:auto;padding:2rem 1rem}
+.modal-bg.open{display:flex;align-items:flex-start;justify-content:center}
+.modal{background:var(--dk);border-radius:16px;max-width:780px;width:100%;padding:2rem;position:relative;border:1px solid var(--gr)}
+.modal-cls{position:absolute;top:1rem;right:1rem;background:var(--gr);border:none;color:#fff;width:36px;height:36px;border-radius:50%;font-size:1.2rem;cursor:pointer;transition:background .2s}
+.modal-cls:hover{background:var(--or)}
+.modal-cat{font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--or);margin-bottom:.6rem}
+.modal h2{font-size:clamp(1.2rem,3vw,1.8rem);margin-bottom:.8rem;line-height:1.3}
+.modal-meta{font-size:.8rem;color:var(--lg);margin-bottom:1.5rem;display:flex;gap:1rem;flex-wrap:wrap}
+.modal-thumb{aspect-ratio:16/9;background:var(--gr);border-radius:10px;overflow:hidden;margin-bottom:1.5rem}
+.modal-body{color:#d0d0d0;font-size:.93rem;line-height:1.9}
+.modal-body p{margin-bottom:1rem}
+.modal-body h3{font-family:'Montserrat',sans-serif;font-weight:700;color:#fff;margin:1.5rem 0 .5rem}
+.modal-body ul{padding-left:1.2rem;margin-bottom:1rem}
+.modal-body ul li{margin-bottom:.4rem;list-style:disc}
+/* GUIDE GRID */
+.ggrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:1.3rem}
+.gcard{background:var(--card);border-radius:var(--rad);overflow:hidden;border:1px solid var(--gr);transition:transform .25s,border-color .25s;cursor:pointer}
+.gcard:hover{transform:translateY(-4px);border-color:var(--or)}
+.gthumb{position:relative;aspect-ratio:16/9;background:var(--gr);overflow:hidden}
+.glvl{position:absolute;top:.5rem;left:.5rem;padding:.18rem .5rem;border-radius:4px;font-size:.68rem;font-weight:700;text-transform:uppercase}
+.lv-b{background:#4caf50;color:#fff}.lv-m{background:#ff9800;color:#fff}.lv-a{background:#e53935;color:#fff}
+.ginfo{padding:.9rem 1rem}
+.gtitle{font-family:'Montserrat',sans-serif;font-weight:700;font-size:.9rem;margin-bottom:.3rem}
+.gdesc{font-size:.8rem;color:var(--lg);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;margin-bottom:.7rem}
+.gfoot{display:flex;align-items:center;justify-content:space-between;font-size:.78rem;color:var(--lg)}
+/* MATCH */
+.mlist{display:flex;flex-direction:column;gap:.7rem}
+.mcard{background:var(--card);border:1px solid var(--gr);border-radius:var(--rad);padding:.9rem 1.3rem;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:.8rem;transition:border-color .2s}
+.mcard:hover{border-color:var(--or)}
+.mcard.live{border-color:var(--or);background:rgba(255,107,0,.06)}
+.team{display:flex;align-items:center;gap:.7rem}
+.team.aw{flex-direction:row-reverse;text-align:right}
+.tlogo{width:40px;height:40px;border-radius:50%;background:var(--gr);display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0;border:2px solid var(--gr2)}
+.tname{font-family:'Montserrat',sans-serif;font-weight:700;font-size:.88rem}
+.tleague{font-size:.72rem;color:var(--lg)}
+.sc-center{display:flex;flex-direction:column;align-items:center;gap:.15rem;min-width:90px}
+.score{font-family:'Montserrat',sans-serif;font-weight:900;font-size:1.8rem;letter-spacing:3px}
+.mtime{font-size:.75rem;color:var(--lg);text-align:center}
+.live-b{background:#e53935;color:#fff;font-size:.62rem;font-weight:800;text-transform:uppercase;letter-spacing:1px;padding:.1rem .45rem;border-radius:4px;animation:pls 1.5s infinite}
+@keyframes pls{0%,100%{opacity:1}50%{opacity:.4}}
+.btn-dt{font-size:.75rem;padding:.28rem .7rem;border-radius:6px;background:var(--gr);color:var(--lg);border:none;cursor:pointer;transition:all .2s}
+.btn-dt:hover{background:var(--or);color:#fff}
+.mdetail{display:none;padding:.8rem;margin-top:.6rem;background:var(--dk2);border-radius:8px;border-top:1px solid var(--gr)}
+.qrow{display:grid;grid-template-columns:repeat(6,1fr);gap:.4rem;text-align:center;font-size:.78rem}
+.qlbl{font-weight:700;color:var(--lg);font-size:.7rem}
+.qval{font-family:'Montserrat',sans-serif;font-weight:700}
+.dhead{font-family:'Montserrat',sans-serif;font-weight:700;font-size:.8rem;text-transform:uppercase;letter-spacing:1px;color:var(--or);padding:.4rem 0;margin-top:1.3rem;border-bottom:1px solid var(--gr);margin-bottom:.7rem}
+/* TEAM TABS */
+.ttabs{display:flex;gap:.4rem;flex-wrap:wrap;margin-bottom:1.8rem}
+.ttab{padding:.45rem 1.1rem;border-radius:8px;background:var(--dk2);border:1px solid var(--gr);color:var(--lg);font-family:'Montserrat',sans-serif;font-weight:600;font-size:.82rem;cursor:pointer;transition:all .2s}
+.ttab:hover,.ttab.on{background:var(--or);border-color:var(--or);color:#fff}
+.pgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:1.1rem}
+.pcard{background:var(--card);border-radius:var(--rad);overflow:hidden;border:1px solid var(--gr);text-align:center;padding-bottom:.9rem;transition:transform .25s,border-color .25s}
+.pcard:hover{transform:translateY(-4px);border-color:var(--or)}
+.pphoto{aspect-ratio:3/4;background:linear-gradient(160deg,var(--gr),var(--dk2));display:flex;align-items:flex-end;justify-content:center;font-size:3rem;padding-bottom:.4rem}
+.pname{font-family:'Montserrat',sans-serif;font-weight:700;font-size:.85rem;margin:.6rem .4rem .2rem}
+.ppos{font-size:.72rem;color:var(--or);font-weight:600}
+.pstats{display:flex;justify-content:center;gap:.8rem;margin-top:.5rem;font-size:.72rem;color:var(--lg)}
+/* FOOTER */
+footer{background:var(--dk);border-top:1px solid var(--gr);padding:2.5rem 0 1.5rem;margin-top:3rem}
+.fin{display:grid;grid-template-columns:2fr 1fr 1fr;gap:2rem;margin-bottom:1.5rem}
+.fbrand p{font-size:.85rem;color:var(--lg);max-width:260px;line-height:1.7}
+.fcol h4{font-family:'Montserrat',sans-serif;font-size:.82rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:.8rem}
+.fcol li{margin-bottom:.4rem}.fcol li a{color:var(--lg);font-size:.84rem;transition:color .2s}
+.fcol li a:hover{color:var(--or)}
+.fbot{border-top:1px solid var(--gr);padding-top:.8rem;display:flex;justify-content:space-between;font-size:.8rem;color:var(--lg)}
+/* RESPONSIVE */
+@media(max-width:900px){
+  .hero .con{grid-template-columns:1fr;text-align:center}
+  .hero-desc{max-width:100%}.hero-actions{justify-content:center}
+  .hero-ball{display:none}.fin{grid-template-columns:1fr 1fr}
+  .fin .fbrand{grid-column:1/-1}
+}
+@media(max-width:768px){
+  .nav-links{display:none}.mnav-toggle{display:block}.sb{display:none}
+  .vgrid,.ngrid,.ggrid{grid-template-columns:1fr}
+  .mcard{grid-template-columns:1fr;text-align:center}
+  .team.aw{flex-direction:row}.sc-center{order:-1}.score{font-size:1.4rem}
+  .pgrid{grid-template-columns:repeat(2,1fr)}.fin{grid-template-columns:1fr}
+  .fbot{flex-direction:column;gap:.4rem;text-align:center}
+}
+</style>
+</head>
+<body>
+
+<!-- ===== NAVBAR ===== -->
+<nav class="nav">
+  <div class="con">
+    <a href="#" class="nav-logo" onclick="showPage('home')">🏀 Hoop<span>VN</span></a>
+    <ul class="nav-links">
+      <li><a href="#" class="active" onclick="showPage('home');return false">Trang chủ</a></li>
+      <li><a href="#" onclick="showPage('highlight');return false">Video Highlight</a></li>
+      <li><a href="#" onclick="showPage('tintuc');return false">Tin tức</a></li>
+      <li><a href="#" onclick="showPage('huongdan');return false">Hướng dẫn</a></li>
+      <li><a href="#" onclick="showPage('lichthidau');return false">Lịch thi đấu</a></li>
+      <li><a href="#" onclick="showPage('doihinh');return false">Đội hình</a></li>
+    </ul>
+    <div class="nav-r">
+      <div class="sb">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#aaa" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+        <input type="text" placeholder="Tìm kiếm..." id="searchInput"/>
+      </div>
+      <button class="mnav-toggle" onclick="document.querySelector('.mnav').classList.add('open')">☰</button>
+    </div>
+  </div>
+</nav>
+
+<!-- MOBILE NAV -->
+<div class="mnav">
+  <div class="mnav-in">
+    <button class="cls" onclick="document.querySelector('.mnav').classList.remove('open')">✕</button>
+    <a href="#" onclick="showPage('home');document.querySelector('.mnav').classList.remove('open');return false">🏠 Trang chủ</a>
+    <a href="#" onclick="showPage('highlight');document.querySelector('.mnav').classList.remove('open');return false">🎬 Video Highlight</a>
+    <a href="#" onclick="showPage('tintuc');document.querySelector('.mnav').classList.remove('open');return false">📰 Tin tức</a>
+    <a href="#" onclick="showPage('huongdan');document.querySelector('.mnav').classList.remove('open');return false">📖 Hướng dẫn</a>
+    <a href="#" onclick="showPage('lichthidau');document.querySelector('.mnav').classList.remove('open');return false">📅 Lịch thi đấu</a>
+    <a href="#" onclick="showPage('doihinh');document.querySelector('.mnav').classList.remove('open');return false">👥 Đội hình</a>
+  </div>
+</div>
+
+<!-- ===== ARTICLE MODAL ===== -->
+<div class="modal-bg" id="articleModal">
+  <div class="modal">
+    <button class="modal-cls" onclick="closeModal()">✕</button>
+    <div class="modal-cat" id="mCat"></div>
+    <h2 id="mTitle"></h2>
+    <div class="modal-meta" id="mMeta"></div>
+    <div class="modal-thumb"><div class="ph" id="mThumb"></div></div>
+    <div class="modal-body" id="mBody"></div>
+  </div>
+</div>
+
+<!-- ===== PAGE: HOME ===== -->
+<div class="page active" id="page-home">
+  <section class="hero">
+    <div class="hero-bg">BASKETBALL</div>
+    <div class="con">
+      <div>
+        <span class="hero-tag">🔥 Bóng Rổ Việt Nam</span>
+        <h1 class="hero-title">Tổng hợp mọi<br><span>Highlight Bóng Rổ</span><br>đỉnh nhất!</h1>
+        <p class="hero-desc">Xem video highlight, theo dõi tỷ số trực tiếp, học kỹ thuật bóng rổ cùng cộng đồng học sinh Việt Nam.</p>
+        <div class="hero-actions">
+          <button class="btn btn-p" onclick="showPage('highlight')">▶ Xem Highlight Ngay</button>
+          <button class="btn btn-o" onclick="showPage('lichthidau')">📅 Lịch thi đấu</button>
+        </div>
+      </div>
+      <div class="hero-ball">🏀</div>
+    </div>
+  </section>
+  <div class="stats">
+    <div class="con">
+      <div style="text-align:center"><div class="stat-n" data-count="248">0</div><div class="stat-l">Video Highlight</div></div>
+      <div style="text-align:center"><div class="stat-n" data-count="32">0</div><div class="stat-l">Đội bóng</div></div>
+      <div style="text-align:center"><div class="stat-n" data-count="5600">0</div><div class="stat-l">Học sinh theo dõi</div></div>
+      <div style="text-align:center"><div class="stat-n" data-count="120">0</div><div class="stat-l">Bài hướng dẫn</div></div>
+    </div>
+  </div>
+  <section class="sec">
+    <div class="con">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1.2rem;flex-wrap:wrap;gap:.8rem">
+        <h2 class="sec-title" style="margin-bottom:0">Video Highlight Mới Nhất</h2>
+        <button class="btn btn-o" style="font-size:.82rem" onclick="showPage('highlight')">Xem tất cả →</button>
+      </div>
+      <div class="vgrid" id="homeVideos"></div>
+    </div>
+  </section>
+  <section class="sec" style="background:var(--dk2);padding-top:2rem;padding-bottom:2rem">
+    <div class="con">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1.2rem;flex-wrap:wrap;gap:.8rem">
+        <h2 class="sec-title" style="margin-bottom:0">Tin Tức Mới Nhất</h2>
+        <button class="btn btn-o" style="font-size:.82rem" onclick="showPage('tintuc')">Xem tất cả →</button>
+      </div>
+      <div class="ngrid" id="homeNews"></div>
+    </div>
+  </section>
+  <section class="sec">
+    <div class="con">
+      <div style="background:linear-gradient(135deg,rgba(255,107,0,.15),rgba(255,107,0,.05));border:1px solid rgba(255,107,0,.3);border-radius:16px;padding:2rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1.2rem">
+        <div><h2 style="font-size:1.4rem;margin-bottom:.4rem">Muốn học bóng rổ từ cơ bản? 🏀</h2><p style="color:var(--lg)">Khám phá hơn 120 bài hướng dẫn kỹ thuật từ cơ bản đến nâng cao.</p></div>
+        <button class="btn btn-p" onclick="showPage('huongdan')">Học ngay →</button>
+      </div>
+    </div>
+  </section>
+  <footer><div class="con"><div class="fin">
+    <div class="fbrand"><div class="nav-logo" style="font-family:Montserrat;font-weight:900;font-size:1.3rem;margin-bottom:.6rem">🏀 Hoop<span style="color:var(--or)">VN</span></div><p>Website bóng rổ dành cho học sinh Việt Nam. Theo dõi highlight, tỷ số và học kỹ thuật mỗi ngày.</p></div>
+    <div class="fcol"><h4>Trang</h4><ul><li><a href="#" onclick="showPage('highlight');return false">Video Highlight</a></li><li><a href="#" onclick="showPage('tintuc');return false">Tin tức</a></li><li><a href="#" onclick="showPage('huongdan');return false">Hướng dẫn</a></li><li><a href="#" onclick="showPage('lichthidau');return false">Lịch thi đấu</a></li><li><a href="#" onclick="showPage('doihinh');return false">Đội hình</a></li></ul></div>
+    <div class="fcol"><h4>Liên hệ</h4><ul><li><a href="#">📧 hoopvn@email.com</a></li><li><a href="#">📘 Facebook</a></li><li><a href="#">📺 YouTube</a></li></ul></div>
+  </div><div class="fbot"><span>© 2026 HoopVN – Nhóm 4, Lớp 10.3</span><span>Bản quyền & Liên hệ</span></div></div></footer>
+</div>
+
+<!-- ===== PAGE: HIGHLIGHT ===== -->
+<div class="page" id="page-highlight">
+  <div class="phero"><div class="con"><h1>🎬 Video <span style="color:var(--or)">Highlight</span></h1><p>Những pha bóng đẹp nhất, cú slam dunk siêu đỉnh và buzzer beater không tưởng</p></div></div>
+  <div class="con" style="padding-bottom:0">
+    <div class="fbar">
+      <select class="fsel" id="vFilterLeague" onchange="filterVideos()">
+        <option value="all">Tất cả giải đấu</option>
+        <option value="NBL Vietnam">NBL Vietnam</option>
+        <option value="NBA">NBA</option>
+        <option value="EuroLeague">EuroLeague</option>
+        <option value="Học sinh">Giải học sinh</option>
+      </select>
+      <div class="chips" id="vFilterType">
+        <span class="chip on" data-v="all">Tất cả</span>
+        <span class="chip" data-v="Slam Dunk">Slam Dunk</span>
+        <span class="chip" data-v="Buzzer Beater">Buzzer Beater</span>
+        <span class="chip" data-v="Top 10">Top 10</span>
+        <span class="chip" data-v="Hậu vệ">Hậu vệ</span>
+      </div>
+    </div>
+  </div>
+  <section class="sec" style="padding-top:1rem">
+    <div class="con"><div class="vgrid" id="allVideos"></div></div>
+  </section>
+</div>
+
+<!-- ===== PAGE: TIN TỨC ===== -->
+<div class="page" id="page-tintuc">
+  <div class="phero"><div class="con"><h1>📰 Tin Tức <span style="color:var(--or)">Bóng Rổ</span></h1><p>Cập nhật tin tức mới nhất từ các giải đấu chuyên nghiệp</p></div></div>
+  <div class="con" style="padding-bottom:0">
+    <div class="sb" style="max-width:480px;border-radius:10px;padding:.55rem 1.1rem;margin-bottom:1rem">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#aaa" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+      <input type="text" placeholder="Tìm kiếm bài viết..." style="width:100%;font-size:.9rem" id="newsSearch" oninput="filterNews()"/>
+    </div>
+    <div class="chips" id="newsChips">
+      <span class="chip on" data-n="all">Tất cả</span>
+      <span class="chip" data-n="NBL Vietnam">NBL Vietnam</span>
+      <span class="chip" data-n="NBA">NBA</span>
+      <span class="chip" data-n="EuroLeague">EuroLeague</span>
+      <span class="chip" data-n="Học sinh">Học sinh</span>
+      <span class="chip" data-n="Cầu thủ">Cầu thủ</span>
+      <span class="chip" data-n="Phân tích">Phân tích</span>
+    </div>
+  </div>
+  <section class="sec" style="padding-top:1rem">
+    <div class="con"><div class="ngrid" id="allNews"></div></div>
+  </section>
+</div>
+
+<!-- ===== PAGE: HƯỚNG DẪN ===== -->
+<div class="page" id="page-huongdan">
+  <div class="phero"><div class="con"><h1>📖 Hướng Dẫn <span style="color:var(--or)">Tập Luyện</span></h1><p>Học kỹ thuật bóng rổ từ cơ bản đến nâng cao</p></div></div>
+  <div class="con" style="padding-bottom:0">
+    <div class="fbar">
+      <select class="fsel" id="gFilterTopic" onchange="filterGuides()">
+        <option value="all">Tất cả kỹ thuật</option>
+        <option value="Ném rổ">Kỹ thuật ném</option>
+        <option value="Dribble">Dribble</option>
+        <option value="Phòng thủ">Phòng thủ</option>
+        <option value="Chuyền bóng">Chuyền bóng</option>
+        <option value="Chiến thuật">Chiến thuật</option>
+      </select>
+      <div class="chips" id="gFilterLevel">
+        <span class="chip on" data-g="all">Tất cả</span>
+        <span class="chip" data-g="basic" style="border-color:#4caf50;color:#4caf50">🟢 Cơ bản</span>
+        <span class="chip" data-g="medium" style="border-color:#ff9800;color:#ff9800">🟡 Trung bình</span>
+        <span class="chip" data-g="advanced" style="border-color:#e53935;color:#e53935">🔴 Nâng cao</span>
+      </div>
+    </div>
+  </div>
+  <section class="sec" style="padding-top:1rem">
+    <div class="con"><div class="ggrid" id="allGuides"></div></div>
+  </section>
+</div>
+
+<!-- ===== PAGE: LỊCH THI ĐẤU ===== -->
+<div class="page" id="page-lichthidau">
+  <div class="phero"><div class="con"><h1>📅 Lịch Thi Đấu &amp; <span style="color:var(--or)">Tỷ Số</span></h1><p>Cập nhật tỷ số trực tiếp và lịch thi đấu các giải</p></div></div>
+  <div class="con" style="padding-bottom:0">
+    <div class="fbar">
+      <select class="fsel" id="mFilterLeague" onchange="filterMatches()">
+        <option value="all">Tất cả giải đấu</option>
+        <option value="NBL Vietnam">NBL Vietnam</option>
+        <option value="NBA">NBA</option>
+        <option value="EuroLeague">EuroLeague</option>
+      </select>
+      <div class="chips" id="mFilterStatus">
+        <span class="chip on" data-m="all">Tất cả</span>
+        <span class="chip" data-m="live" style="border-color:#e53935;color:#e53935">🔴 Trực tiếp</span>
+        <span class="chip" data-m="today">Hôm nay</span>
+        <span class="chip" data-m="upcoming">Sắp diễn ra</span>
+        <span class="chip" data-m="result">Kết quả</span>
+      </div>
+    </div>
+  </div>
+  <section class="sec" style="padding-top:1rem">
+    <div class="con" id="matchContainer"></div>
+  </section>
+</div>
+
+<!-- ===== PAGE: ĐỘI HÌNH ===== -->
+<div class="page" id="page-doihinh">
+  <div class="phero"><div class="con"><h1>👥 Đội Hình <span style="color:var(--or)">Các Đội</span></h1><p>Danh sách cầu thủ, vị trí và thống kê NBL Vietnam · NBA · EuroLeague</p></div></div>
+  <section class="sec" style="padding-top:1rem">
+    <div class="con">
+      <div class="fbar" style="margin-bottom:1rem">
+        <select class="fsel" id="teamLeagueFilter" onchange="filterTeamsByLeague()">
+          <option value="all">Tất cả giải đấu</option>
+          <option value="NBL Vietnam">NBL Vietnam</option>
+          <option value="NBA">NBA</option>
+          <option value="EuroLeague">EuroLeague</option>
+        </select>
+      </div>
+      <div class="ttabs" id="teamTabs"></div>
+      <div id="rosterContainer"></div>
+      <div style="margin-top:1.5rem;padding:.9rem;background:var(--dk2);border-radius:8px;font-size:.78rem;color:var(--lg);display:flex;gap:1.2rem;flex-wrap:wrap">
+        <span><b style="color:#fff">PG</b>=Point Guard</span><span><b style="color:#fff">SG</b>=Shooting Guard</span><span><b style="color:#fff">SF</b>=Small Forward</span><span><b style="color:#fff">PF</b>=Power Forward</span><span><b style="color:#fff">C</b>=Center</span><span><b style="color:#fff">PPG</b>=Điểm/trận</span><span><b style="color:#fff">REB</b>=Bật bảng/trận</span><span><b style="color:#fff">AST</b>=Kiến tạo/trận</span>
+      </div>
+    </div>
+  </section>
+</div>
+
+<script>
+// ═══════════════════════════════════════════════
+// DATA
+// ═══════════════════════════════════════════════
+
+const VIDEOS = [
+  {id:1,title:'Top 10 pha ghi điểm đỉnh nhất NBL Vietnam tháng 10',league:'NBL Vietnam',type:'Top 10',dur:'2:34',icon:'🏀',badge:'🔥 Hot',likes:342,date:'2 ngày trước'},
+  {id:2,title:'Cú slam dunk siêu đẹp của #7 Saigon Heat',league:'NBL Vietnam',type:'Slam Dunk',dur:'1:58',icon:'🔥',badge:'Slam Dunk',likes:218,date:'3 ngày trước'},
+  {id:3,title:'Buzzer beater không tưởng – Thang Long Warriors thắng nghẹt thở',league:'NBL Vietnam',type:'Buzzer Beater',dur:'0:45',icon:'⏰',badge:'Buzzer',likes:576,date:'5 ngày trước'},
+  {id:4,title:'Top 10 pha bóng đẹp nhất NBA tuần này',league:'NBA',type:'Top 10',dur:'5:20',icon:'🏆',badge:'Top 10',likes:890,date:'1 tuần trước'},
+  {id:5,title:'LeBron James – Highlight trận Boston Celtics vs Lakers',league:'NBA',type:'Hậu vệ',dur:'3:45',icon:'👑',badge:'NBA',likes:1240,date:'2 ngày trước'},
+  {id:6,title:'Stephen Curry – 8 quả 3 điểm trong 1 trận',league:'NBA',type:'Slam Dunk',dur:'4:10',icon:'🎯',badge:'Hot',likes:2100,date:'4 ngày trước'},
+  {id:7,title:'EuroLeague – Barcelona vs Real Madrid highlight',league:'EuroLeague',type:'Top 10',dur:'6:20',icon:'⚽',badge:'EuroLeague',likes:445,date:'3 ngày trước'},
+  {id:8,title:'Nikola Jokic triple-double highlight Denver Nuggets',league:'NBA',type:'Hậu vệ',dur:'3:55',icon:'🦄',badge:'MVP',likes:980,date:'1 tuần trước'},
+  {id:9,title:'Highlight toàn trận: Cantho Catfish vs Hanoi Buffaloes',league:'NBL Vietnam',type:'Buzzer Beater',dur:'3:07',icon:'🐟',badge:'Full',likes:145,date:'1 tuần trước'},
+  {id:10,title:'Real Madrid Endesa – Buzzer beater ở giây cuối',league:'EuroLeague',type:'Buzzer Beater',dur:'1:15',icon:'🏰',badge:'Buzzer',likes:560,date:'5 ngày trước'},
+  {id:11,title:'Khoảnh khắc đẹp giải học sinh THPT TP.HCM 2026',league:'Học sinh',type:'Top 10',dur:'2:15',icon:'🎽',badge:'Học sinh',likes:203,date:'2 tuần trước'},
+  {id:12,title:'Giannis Antetokounmpo – Slam dunk điên rồ nhất mùa',league:'NBA',type:'Slam Dunk',dur:'0:55',icon:'💪',badge:'Monster',likes:3200,date:'6 ngày trước'},
+];
+
+const NEWS = [
+  {id:1,cat:'NBL Vietnam',icon:'🏆',title:'Saigon Heat vô địch NBL Vietnam mùa giải 2026 – Chức vô địch lần thứ tư lịch sử',exc:'Sau trận chung kết kịch tính 88-82, Saigon Heat lần thứ tư giành chức vô địch.',date:'18/10/2026',body:`
+    <p>Đêm 18/10/2026 tại Nhà thi đấu Phú Thọ, TP.HCM, <strong>Saigon Heat</strong> đã chính thức đăng quang tại giải bóng rổ chuyên nghiệp Việt Nam NBL Vietnam sau khi vượt qua Thang Long Warriors với tỷ số <strong>88-82</strong> trong một trận chung kết đầy kịch tính.</p>
+    <h3>Diễn biến trận đấu</h3>
+    <p>Thang Long Warriors mở màn rất tốt với lợi thế 5 điểm sau hiệp 1. Tuy nhiên, Saigon Heat đã bứt phá mạnh mẽ ở hiệp 3 nhờ loạt điểm dồn dập từ đội trưởng Nguyễn Thanh Bình.</p>
+    <ul>
+      <li>Quý 1: Saigon Heat 20 – 22 Thang Long Warriors</li>
+      <li>Quý 2: Saigon Heat 22 – 19 Thang Long Warriors</li>
+      <li>Quý 3: Saigon Heat 26 – 18 Thang Long Warriors</li>
+      <li>Quý 4: Saigon Heat 20 – 23 Thang Long Warriors</li>
+    </ul>
+    <h3>Cầu thủ xuất sắc nhất</h3>
+    <p>Nguyễn Thanh Bình ghi 32 điểm, 7 assist và được bầu chọn là MVP của trận chung kết. Đây là mùa giải ấn tượng nhất trong sự nghiệp của anh.</p>
+    <h3>Ý nghĩa lịch sử</h3>
+    <p>Đây là chức vô địch thứ 4 trong lịch sử của Saigon Heat, khẳng định vị thế là đội bóng thành công nhất trong lịch sử NBL Vietnam.</p>
+  `},
+  {id:2,cat:'NBA',icon:'🏀',title:'NBA 2026-27 khai mạc: LeBron James tiếp tục tỏa sáng ở tuổi 42',exc:'Giải bóng rổ nhà nghề Mỹ khai màn với màn trình diễn ấn tượng của LeBron James.',date:'15/10/2026',body:`
+    <p>Giải NBA mùa giải 2026-27 chính thức khai màn với màn trình diễn xuất sắc của <strong>LeBron James</strong> khi ghi 28 điểm, 9 kiến tạo trong trận đầu tiên của Los Angeles Lakers.</p>
+    <h3>Những thay đổi lớn mùa này</h3>
+    <ul>
+      <li>Luật mới: Tăng thời gian giữ bóng tấn công lên 24 giây từ pha phạt</li>
+      <li>Đội hình mới: Oklahoma City Thunder được kỳ vọng tranh ngôi vương</li>
+      <li>Tân binh xuất sắc: Victor Wembanyama tiếp tục gây ấn tượng mạnh</li>
+    </ul>
+    <h3>Dự đoán mùa giải</h3>
+    <p>Các chuyên gia dự đoán Boston Celtics và Oklahoma City Thunder sẽ là hai ứng viên nặng ký nhất cho chức vô địch NBA năm nay.</p>
+  `},
+  {id:3,cat:'EuroLeague',icon:'🏰',title:'EuroLeague 2026-27: Real Madrid Baloncesto thống trị châu Âu',exc:'Real Madrid tiếp tục khẳng định sức mạnh tại đấu trường châu Âu.',date:'12/10/2026',body:`
+    <p><strong>Real Madrid Baloncesto</strong> đã khởi đầu mùa giải EuroLeague 2026-27 với 4 chiến thắng liên tiếp, khẳng định vị thế ứng viên vô địch số 1.</p>
+    <h3>Kết quả vòng đầu</h3>
+    <ul>
+      <li>Real Madrid 89 – 72 CSKA Moscow</li>
+      <li>Barcelona 85 – 81 Olympiacos</li>
+      <li>Fenerbahçe 78 – 83 Anadolu Efes</li>
+    </ul>
+    <h3>Cầu thủ đáng chú ý</h3>
+    <p>Sergio Llull tiếp tục là linh hồn của Real Madrid dù đã 38 tuổi, trong khi đó Nikola Mirotic đang có phong độ xuất sắc với 22 điểm/trận.</p>
+  `},
+  {id:4,cat:'Học sinh',icon:'🎽',title:'Giải bóng rổ học sinh THPT TP.HCM – 8 đội vào vòng knock-out',exc:'Vòng bảng giải bóng rổ học sinh THPT TP.HCM kết thúc với nhiều bất ngờ.',date:'10/10/2026',body:`
+    <p>Sau 2 tuần thi đấu vòng bảng đầy kịch tính, <strong>8 đội xuất sắc nhất</strong> đã giành vé vào vòng tứ kết giải bóng rổ học sinh THPT TP.HCM 2026.</p>
+    <h3>8 đội lọt vào vòng tứ kết</h3>
+    <ul>
+      <li>THPT Lê Quý Đôn (nhất bảng A)</li>
+      <li>THPT Gia Định (nhì bảng A)</li>
+      <li>THPT Nguyễn Thị Minh Khai (nhất bảng B)</li>
+      <li>THPT Trần Đại Nghĩa (nhì bảng B)</li>
+      <li>THPT Marie Curie (nhất bảng C)</li>
+      <li>THPT Võ Thị Sáu (nhì bảng C)</li>
+      <li>THPT Nguyễn Hữu Huân (nhất bảng D)</li>
+      <li>THPT Bình Chánh (nhì bảng D)</li>
+    </ul>
+    <h3>Lịch tứ kết</h3>
+    <p>Vòng tứ kết sẽ diễn ra vào ngày 25/10/2026 tại Trung tâm TDTT Quận 1.</p>
+  `},
+  {id:5,cat:'Cầu thủ',icon:'⭐',title:'Cầu thủ Việt kiều số 1 gia nhập đội tuyển quốc gia',exc:'HLV trưởng triệu tập cầu thủ 20 tuổi gốc Việt từ Mỹ về thi đấu Sea Games.',date:'8/10/2026',body:`
+    <p><strong>Marcus Nguyễn</strong> (tên tiếng Việt: Nguyễn Minh Khải), 20 tuổi, sinh ra tại California nhưng mang quốc tịch Việt Nam, vừa được HLV trưởng đội tuyển bóng rổ Việt Nam triệu tập.</p>
+    <h3>Hành trình của Marcus Nguyễn</h3>
+    <p>Sinh ra và lớn lên tại San Jose, California, Marcus Nguyễn bắt đầu chơi bóng rổ từ năm 8 tuổi. Anh từng thi đấu cho đội tuyển trường UCLA trước khi quyết định về Việt Nam thi đấu.</p>
+    <h3>Kỳ vọng tại Sea Games 2027</h3>
+    <p>Với chiều cao 2m05 và khả năng ghi điểm xuất sắc (22 điểm/trận tại giải sinh viên Mỹ), Marcus được kỳ vọng sẽ là nhân tố quan trọng giúp Việt Nam cạnh tranh huy chương tại Sea Games.</p>
+  `},
+  {id:6,cat:'Phân tích',icon:'📊',title:'Chiến thuật zone defense – Bí quyết thành công của Cantho Catfish',exc:'Phân tích chiến thuật phòng thủ zone 2-3 giúp Cantho Catfish thắng đối thủ mạnh hơn.',date:'5/10/2026',body:`
+    <p>Một trong những điểm đặc biệt của <strong>Cantho Catfish</strong> mùa giải 2026 là việc sử dụng thuần thục chiến thuật phòng thủ zone 2-3, khiến nhiều đối thủ phải bất ngờ.</p>
+    <h3>Zone Defense 2-3 là gì?</h3>
+    <p>Zone 2-3 là chiến thuật phòng thủ trong đó 2 cầu thủ chịu trách nhiệm vùng ngoài vòng 3 điểm và 3 cầu thủ bảo vệ khu vực gần rổ.</p>
+    <h3>Ưu điểm</h3>
+    <ul>
+      <li>Bảo vệ hiệu quả vùng gần rổ</li>
+      <li>Tiết kiệm sức lực so với man-to-man</li>
+      <li>Tạo nhiều cơ hội bắt bóng lỗi và phản công</li>
+    </ul>
+    <h3>Nhược điểm</h3>
+    <ul>
+      <li>Dễ bị khai thác ở góc 3 điểm</li>
+      <li>Cần sự phối hợp nhịp nhàng</li>
+    </ul>
+  `},
+  {id:7,cat:'NBA',icon:'👑',title:'Stephen Curry phá kỷ lục ném 3 điểm mọi thời đại NBA',exc:'Curry ghi thêm 8 quả 3 điểm trong một trận, nâng tổng số lên kỷ lục mới.',date:'3/10/2026',body:`
+    <p><strong>Stephen Curry</strong> của Golden State Warriors vừa xác lập kỷ lục mới về số lần ném thành công từ vạch 3 điểm trong lịch sử NBA với <strong>3.748 quả</strong>.</p>
+    <h3>Hành trình kỷ lục</h3>
+    <p>Curry đã phá kỷ lục trước đó của chính mình vào đêm 2/10 khi ném vào 8 quả 3 điểm trong trận gặp Dallas Mavericks. Cả sân Chase Center đứng dậy vỗ tay tán thưởng.</p>
+    <h3>Chia sẻ của Curry</h3>
+    <p>"Tôi chưa bao giờ nghĩ mình sẽ đạt được điều này. Đây là thành quả của hàng nghìn giờ luyện tập từ nhỏ đến giờ" – Curry chia sẻ sau trận đấu.</p>
+  `},
+  {id:8,cat:'EuroLeague',icon:'🇪🇸',title:'Barcelona Basquet trở lại sau chấn thương của trụ cột',exc:'Nikola Mirotic trở lại thi đấu sau 3 tuần chấn thương, Barcelona thắng 3 liên tiếp.',date:'1/10/2026',body:`
+    <p>Sự trở lại của <strong>Nikola Mirotic</strong> đã giúp Barcelona Basquet giành 3 chiến thắng liên tiếp tại EuroLeague, vươn lên vị trí thứ 2 bảng xếp hạng.</p>
+    <h3>Phong độ Mirotic</h3>
+    <p>Trong 3 trận trở lại, Mirotic ghi trung bình 24.3 điểm/trận, 8.7 bật bảng và 3.3 kiến tạo, thể hiện phong độ đỉnh cao.</p>
+    <h3>Lịch thi đấu sắp tới</h3>
+    <p>Barcelona sẽ có trận đại chiến với Real Madrid vào ngày 28/10 trong trận derby Tây Ban Nha được chờ đợi nhất mùa giải.</p>
+  `},
+  {id:9,cat:'NBL Vietnam',icon:'🔥',title:'Saigon Heat ký hợp đồng với cầu thủ ngoại mới cho mùa 2027',exc:'Ban lãnh đạo Saigon Heat công bố 2 tân binh ngoại nhập cảnh trước thềm mùa mới.',date:'28/9/2026',body:`
+    <p><strong>Saigon Heat</strong> vừa công bố ký hợp đồng với 2 cầu thủ ngoại cho mùa giải NBL Vietnam 2027: trung phong người Mỹ <strong>DeShawn Williams</strong> (2m08) và hậu vệ người Philippines <strong>Kobe Paras</strong>.</p>
+    <h3>Về DeShawn Williams</h3>
+    <p>Williams từng thi đấu cho Charlotte Hornets ở NBA G League với trung bình 18 điểm và 10 bật bảng/trận. Đây là bản hợp đồng đắt giá nhất lịch sử NBL Vietnam.</p>
+    <h3>Về Kobe Paras</h3>
+    <p>Con trai của huyền thoại bóng rổ Philippines Benjie Paras, Kobe là một trong những cầu thủ trẻ tài năng nhất Đông Nam Á với 21 điểm/trận ở PBA.</p>
+  `},
+];
+
+const GUIDES = [
+  {id:1,icon:'🏀',title:'Kỹ thuật dribble cơ bản cho người mới',topic:'Dribble',level:'basic',dur:'8 phút',desc:'Học cách kiểm soát bóng, tư thế đúng và các bài tập dribble tại chỗ.',body:`
+    <p>Dribble (rê bóng) là kỹ năng cơ bản nhất trong bóng rổ. Để thực hiện đúng, bạn cần nắm vững các bước sau:</p>
+    <h3>Bước 1: Tư thế cơ bản</h3>
+    <ul>
+      <li>Đứng chân rộng bằng vai, đầu gối hơi khuỵu</li>
+      <li>Lưng thẳng, mắt nhìn về phía trước (không nhìn xuống bóng)</li>
+      <li>Trọng tâm thấp để dễ di chuyển</li>
+    </ul>
+    <h3>Bước 2: Cách cầm bóng</h3>
+    <ul>
+      <li>Dùng ngón tay (không dùng lòng bàn tay) để kiểm soát bóng</li>
+      <li>Cổ tay linh hoạt, không cứng</li>
+      <li>Bóng nảy đến hông, không nảy quá cao</li>
+    </ul>
+    <h3>Bài tập hàng ngày</h3>
+    <ul>
+      <li>Dribble tại chỗ tay thuận: 3 hiệp x 1 phút</li>
+      <li>Dribble tại chỗ tay yếu: 3 hiệp x 1 phút</li>
+      <li>Dribble di chuyển thẳng sân: 10 lần</li>
+    </ul>
+  `},
+  {id:2,icon:'🎯',title:'Tư thế ném rổ chuẩn – BEEF technique',topic:'Ném rổ',level:'basic',dur:'12 phút',desc:'Học kỹ thuật ném rổ chuẩn xác với phương pháp BEEF.',body:`
+    <p>BEEF là viết tắt của <strong>B</strong>alance – <strong>E</strong>yes – <strong>E</strong>lbow – <strong>F</strong>ollow-through, bốn yếu tố cốt lõi để ném rổ chuẩn xác.</p>
+    <h3>B – Balance (Thăng bằng)</h3>
+    <p>Đứng chân rộng bằng vai, chân ném phía trước một chút. Trọng tâm ở giữa, cơ thể hướng thẳng về phía rổ.</p>
+    <h3>E – Eyes (Mắt)</h3>
+    <p>Nhìn cố định vào phía sau vành rổ. Đây là điểm ngắm chuẩn nhất giúp bóng đi vào rổ theo góc lý tưởng.</p>
+    <h3>E – Elbow (Khuỷu tay)</h3>
+    <p>Khuỷu tay phải thẳng đứng, thẳng hàng với vai và bàn chân. Không để khuỷu tay ra ngoài.</p>
+    <h3>F – Follow-through (Hoàn thành động tác)</h3>
+    <p>Sau khi thả bóng, cánh tay duỗi thẳng, cổ tay gập xuống tạo thành hình "cổ cò". Giữ tư thế này đến khi bóng chạm rổ.</p>
+    <h3>Bài tập mỗi ngày</h3>
+    <ul>
+      <li>Ném từ vạch phạt: 50 quả/ngày</li>
+      <li>Ném 5 vị trí xung quanh rổ: 10 quả/vị trí</li>
+    </ul>
+  `},
+  {id:3,icon:'🤲',title:'3 kiểu chuyền bóng cơ bản',topic:'Chuyền bóng',level:'basic',dur:'10 phút',desc:'Chest pass, bounce pass và overhead pass.',body:`
+    <p>Chuyền bóng chính xác là yếu tố then chốt để tạo cơ hội ghi điểm. Hãy nắm vững 3 kiểu chuyền cơ bản này:</p>
+    <h3>1. Chest Pass (Chuyền ngang ngực)</h3>
+    <p>Giữ bóng ngang ngực, hai tay nắm hai bên bóng. Bước về phía đồng đội và đẩy bóng thẳng ra trước, ngón tay chỉ về phía đích.</p>
+    <ul><li>Dùng khi: khoảng cách vừa phải, không có hậu vệ cản đường</li></ul>
+    <h3>2. Bounce Pass (Chuyền nảy)</h3>
+    <p>Chuyền bóng xuống sàn sao cho bóng nảy lên và đến tay đồng đội ở tầm hông. Điểm nảy phải cách đồng đội khoảng 2/3 khoảng cách.</p>
+    <ul><li>Dùng khi: có hậu vệ cao chặn ở giữa</li></ul>
+    <h3>3. Overhead Pass (Chuyền trên đầu)</h3>
+    <p>Nâng bóng lên trên đầu bằng cả hai tay, duỗi thẳng tay ra sau rồi đẩy bóng về phía trước.</p>
+    <ul><li>Dùng khi: cần chuyền xa hoặc qua đầu hậu vệ</li></ul>
+  `},
+  {id:4,icon:'🛡️',title:'Kỹ thuật phòng thủ 1 đối 1',topic:'Phòng thủ',level:'basic',dur:'9 phút',desc:'Tư thế thấp, di chuyển side-step và cách đọc hướng tấn công.',body:`
+    <p>Phòng thủ tốt là nền tảng của một đội bóng mạnh. Kỹ thuật phòng thủ 1v1 cơ bản gồm:</p>
+    <h3>Tư thế phòng thủ chuẩn</h3>
+    <ul>
+      <li>Đầu gối khuỵu sâu, lưng thẳng</li>
+      <li>Hai chân rộng hơn vai, trọng tâm thấp</li>
+      <li>Tay giơ lên cao để cản đường chuyền</li>
+      <li>Mắt nhìn vào ngực đối thủ, không nhìn bóng</li>
+    </ul>
+    <h3>Di chuyển Side-step</h3>
+    <p>Di chuyển ngang bằng cách bước một chân trước rồi kéo chân còn lại theo. KHÔNG được bắt chéo chân vì sẽ mất thăng bằng.</p>
+    <h3>Đọc hướng tấn công</h3>
+    <ul>
+      <li>Quan sát hông đối thủ, không phải bóng</li>
+      <li>Giữ khoảng cách 1 cánh tay</li>
+      <li>Luôn đứng giữa đối thủ và rổ</li>
+    </ul>
+  `},
+  {id:5,icon:'💨',title:'Crossover – Kỹ thuật qua người',topic:'Dribble',level:'medium',dur:'15 phút',desc:'Crossover dribble để qua mặt hậu vệ đối phương.',body:`
+    <p>Crossover là kỹ thuật dribble chuyển bóng từ tay này sang tay kia một cách nhanh chóng để đánh lừa và vượt qua hậu vệ.</p>
+    <h3>Kỹ thuật cơ bản</h3>
+    <ul>
+      <li>Dribble bóng về phía tay phải, giả vờ đi sang phải</li>
+      <li>Dùng tay phải đẩy bóng chéo sang trái một cách dứt khoát</li>
+      <li>Đồng thời bước mạnh sang trái và tăng tốc</li>
+    </ul>
+    <h3>Các biến thể</h3>
+    <ul>
+      <li><b>Low Crossover:</b> Bóng nảy thấp, khó bị cướp hơn</li>
+      <li><b>Between the Legs:</b> Chuyền bóng qua giữa hai chân</li>
+      <li><b>Behind the Back:</b> Chuyền bóng sau lưng</li>
+    </ul>
+    <h3>Lỗi thường gặp</h3>
+    <ul>
+      <li>Chuyển bóng quá chậm → hậu vệ kịp phản ứng</li>
+      <li>Nảy bóng quá cao → dễ bị cướp</li>
+      <li>Không kết hợp di chuyển chân → không hiệu quả</li>
+    </ul>
+  `},
+  {id:6,icon:'🏃',title:'Layup – Bước chạy và góc ném',topic:'Ném rổ',level:'medium',dur:'13 phút',desc:'Layup tay phải, tay trái và reverse layup.',body:`
+    <p>Layup là cú ném rổ từ khoảng cách gần sau khi di chuyển, là kỹ năng tấn công quan trọng nhất trong bóng rổ.</p>
+    <h3>Nguyên tắc nhịp chân</h3>
+    <p>Khi nhận bóng bên phải rổ: bước phải → bước trái → bật nhảy bằng chân trái → ném tay phải lên bảng.</p>
+    <h3>Điểm ngắm</h3>
+    <p>Ném bóng vào góc trên của ô vuông trên bảng rổ (hộp nhỏ màu đen). Bóng sẽ nảy xuống và vào rổ.</p>
+    <h3>Layup tay trái</h3>
+    <p>Tương tự nhưng ngược lại: bước trái → bước phải → bật nhảy bằng chân phải → ném tay trái.</p>
+    <h3>Reverse Layup</h3>
+    <p>Chạy từ dưới rổ lên và ném bóng bên kia của rổ, dùng thân rổ làm vật cản hậu vệ.</p>
+  `},
+  {id:7,icon:'🔥',title:'Slam Dunk – Bật nhảy và kỹ thuật',topic:'Ném rổ',level:'advanced',dur:'20 phút',desc:'Bí quyết tăng chiều cao bật nhảy và slam dunk an toàn.',body:`
+    <p>Slam dunk là cú ghi điểm đặc trưng và ngoạn mục nhất trong bóng rổ. Để thực hiện được, bạn cần nâng cao khả năng bật nhảy.</p>
+    <h3>Bài tập tăng khả năng bật nhảy</h3>
+    <ul>
+      <li><b>Squat Jump:</b> 4 hiệp x 15 cái, nghỉ 60 giây</li>
+      <li><b>Box Jump:</b> 3 hiệp x 10 cái lên bục 50cm</li>
+      <li><b>Calf Raises:</b> 4 hiệp x 20 cái mỗi chân</li>
+      <li><b>Depth Jump:</b> 3 hiệp x 8 cái từ bục 60cm</li>
+    </ul>
+    <h3>Kỹ thuật slam dunk</h3>
+    <ul>
+      <li>Tiếp cận rổ từ góc 45 độ</li>
+      <li>Bước đà 2-3 bước, bước cuối dài nhất</li>
+      <li>Bật nhảy bằng 1 chân hoặc 2 chân tùy sở trường</li>
+      <li>Tay nắm bóng chắc, không thả rơi khi chạm vành</li>
+    </ul>
+    <h3>Lưu ý an toàn</h3>
+    <p>Khởi động kỹ trước khi tập, đặc biệt là cổ chân và đầu gối. Tránh tập quá nhiều một ngày để tránh chấn thương.</p>
+  `},
+  {id:8,icon:'📐',title:'Pick & Roll – Chiến thuật phối hợp',topic:'Chiến thuật',level:'advanced',dur:'18 phút',desc:'Pick & Roll – vũ khí tấn công hiệu quả nhất bóng rổ hiện đại.',body:`
+    <p>Pick and Roll (Chắn và lăn) là chiến thuật tấn công phổ biến nhất trong bóng rổ hiện đại, được sử dụng ở mọi cấp độ từ nghiệp dư đến NBA.</p>
+    <h3>Cách thực hiện</h3>
+    <ul>
+      <li><b>Bước 1:</b> Cầu thủ A (handler) dribble lên phía cầu thủ B đang đứng</li>
+      <li><b>Bước 2:</b> Cầu thủ B (screener) đặt thân mình chắn hậu vệ đang kèm A</li>
+      <li><b>Bước 3:</b> Cầu thủ A vượt qua màn chắn và tấn công</li>
+      <li><b>Bước 4:</b> Cầu thủ B "lăn" về phía rổ sau khi chắn để nhận chuyền</li>
+    </ul>
+    <h3>Đọc tình huống</h3>
+    <ul>
+      <li>Nếu hậu vệ chuyển sang kèm B: A tiến thẳng ném rổ hoặc layup</li>
+      <li>Nếu hậu vệ vẫn kèm A: A chuyền cho B đang thoát lên gần rổ</li>
+      <li>Nếu có hậu vệ thứ 3 trợ thủ: A tìm đồng đội thoát ở góc xa</li>
+    </ul>
+  `},
+  {id:9,icon:'🦅',title:'Zone Offense – Phá vỡ phòng thủ khu vực',topic:'Chiến thuật',level:'advanced',dur:'22 phút',desc:'Chiến thuật tấn công để phá vỡ phòng thủ zone.',body:`
+    <p>Khi đối thủ sử dụng zone defense, bạn cần có chiến thuật riêng để phá vỡ. Đây là những nguyên tắc cơ bản:</p>
+    <h3>Nguyên tắc tổng quát</h3>
+    <ul>
+      <li>Chuyền bóng nhanh để buộc zone di chuyển và tạo khoảng trống</li>
+      <li>Tấn công từ đỉnh của zone (điểm yếu giữa các cầu thủ)</li>
+      <li>Sử dụng cầu thủ cao trong vùng paint</li>
+    </ul>
+    <h3>Cách phá zone 2-3</h3>
+    <ul>
+      <li>Đặt cầu thủ ở góc 3 điểm để kéo giãn zone</li>
+      <li>Flash một cầu thủ vào vùng high post (trên khu vực gần rổ)</li>
+      <li>Sử dụng ball reversal nhanh từ bên này sang bên kia</li>
+    </ul>
+  `},
+];
+
+const MATCHES = [
+  {id:1,league:'NBL Vietnam',status:'live',home:{name:'Saigon Heat',logo:'🔥'},away:{name:'Thang Long Warriors',logo:'⚡'},score:'82 – 79',time:'Q4 · 3:24 còn lại',quarters:{h:[22,19,25,16],a:[20,21,22,16]}},
+  {id:2,league:'NBA',status:'live',home:{name:'LA Lakers',logo:'💛'},away:{name:'Boston Celtics',logo:'☘️'},score:'98 – 102',time:'Q3 · 8:45 còn lại',quarters:{h:[28,25,45,''],a:[30,22,50,'']}},
+  {id:3,league:'NBL Vietnam',status:'today',home:{name:'Cantho Catfish',logo:'🐟'},away:{name:'Hanoi Buffaloes',logo:'🦬'},score:'– : –',time:'20:00 hôm nay',quarters:null},
+  {id:4,league:'NBL Vietnam',status:'today',home:{name:'HCM City Wings',logo:'🦁'},away:{name:'Danang Dragons',logo:'🐉'},score:'– : –',time:'18:30 hôm nay',quarters:null},
+  {id:5,league:'NBA',status:'today',home:{name:'Golden State Warriors',logo:'🌉'},away:{name:'Phoenix Suns',logo:'☀️'},score:'– : –',time:'10:30 hôm nay',quarters:null},
+  {id:6,league:'EuroLeague',status:'today',home:{name:'Real Madrid',logo:'🏰'},away:{name:'Barcelona',logo:'🔴'},score:'– : –',time:'03:00 hôm nay',quarters:null},
+  {id:7,league:'NBL Vietnam',status:'result',home:{name:'Saigon Heat',logo:'🔥'},away:{name:'Cantho Catfish',logo:'🐟'},score:'95 – 87',time:'Đã kết thúc',quarters:{h:[24,22,26,23],a:[20,23,22,22]}},
+  {id:8,league:'NBL Vietnam',status:'result',home:{name:'Thang Long Warriors',logo:'⚡'},away:{name:'HCM City Wings',logo:'🦁'},score:'78 – 82',time:'Đã kết thúc',quarters:{h:[20,19,21,18],a:[18,22,21,21]}},
+  {id:9,league:'NBA',status:'result',home:{name:'Denver Nuggets',logo:'🏔️'},away:{name:'OKC Thunder',logo:'⚡'},score:'112 – 108',time:'Đã kết thúc',quarters:{h:[28,30,27,27],a:[25,28,30,25]}},
+  {id:10,league:'EuroLeague',status:'result',home:{name:'CSKA Moscow',logo:'⭐'},away:{name:'Fenerbahçe',logo:'🦅'},score:'72 – 80',time:'Đã kết thúc',quarters:{h:[18,20,17,17],a:[22,18,22,18]}},
+  {id:11,league:'NBL Vietnam',status:'upcoming',home:{name:'Hanoi Buffaloes',logo:'🦬'},away:{name:'Danang Dragons',logo:'🐉'},score:'VS',time:'19:00 · 22/10/2026',quarters:null},
+  {id:12,league:'NBA',status:'upcoming',home:{name:'Miami Heat',logo:'🌴'},away:{name:'NY Knicks',logo:'🗽'},score:'VS',time:'09:00 · 23/10/2026',quarters:null},
+  {id:13,league:'EuroLeague',status:'upcoming',home:{name:'Olympiacos',logo:'🏛️'},away:{name:'Panathinaikos',logo:'🍀'},score:'VS',time:'02:00 · 24/10/2026',quarters:null},
+];
+
+const TEAMS = [
+  {id:'heat',league:'NBL Vietnam',name:'Saigon Heat',logo:'🔥',players:[
+    {name:'Nguyễn Thanh Bình',pos:'PG',num:'#3',photo:'🏀',ppg:22.4,ast:6.1},
+    {name:'Trần Minh Khoa',pos:'SG',num:'#7',photo:'🏀',ppg:18.7,ast:3.2},
+    {name:'Lê Quốc Hưng',pos:'SF',num:'#11',photo:'🏀',ppg:14.5,reb:7.3},
+    {name:'Võ Phước Sang',pos:'PF',num:'#23',photo:'🏀',ppg:11.2,reb:8.9},
+    {name:'Đinh Văn Đức',pos:'C',num:'#32',photo:'🏀',ppg:9.8,reb:11.1},
+    {name:'Phạm Gia Huy',pos:'SG',num:'#14',photo:'🏀',ppg:8.3,ast:2.8},
+  ]},
+  {id:'warriors',league:'NBL Vietnam',name:'Thang Long Warriors',logo:'⚡',players:[
+    {name:'Hoàng Minh Đức',pos:'PG',num:'#5',photo:'⚡',ppg:20.1,ast:7.4},
+    {name:'Nguyễn Bảo Long',pos:'SF',num:'#9',photo:'⚡',ppg:17.6,reb:5.2},
+    {name:'Trịnh Công Tuấn',pos:'C',num:'#44',photo:'⚡',ppg:12.3,reb:10.5},
+    {name:'Lưu Đình Khải',pos:'PF',num:'#25',photo:'⚡',ppg:10.8,reb:7.7},
+    {name:'Bùi Tiến Dũng',pos:'SG',num:'#18',photo:'⚡',ppg:9.5,ast:3.1},
+  ]},
+  {id:'catfish',league:'NBL Vietnam',name:'Cantho Catfish',logo:'🐟',players:[
+    {name:'Huỳnh Thanh Tâm',pos:'PG',num:'#2',photo:'🐟',ppg:16.9,ast:8.2},
+    {name:'Phan Nhật Khánh',pos:'C',num:'#34',photo:'🐟',ppg:13.4,reb:12.0},
+    {name:'Võ Tiến Dũng',pos:'SF',num:'#15',photo:'🐟',ppg:11.7,reb:4.3},
+    {name:'Lâm Quang Huy',pos:'SG',num:'#8',photo:'🐟',ppg:10.2,ast:2.9},
+  ]},
+  {id:'buffaloes',league:'NBL Vietnam',name:'Hanoi Buffaloes',logo:'🦬',players:[
+    {name:'Đỗ Việt Hùng',pos:'SG',num:'#8',photo:'🦬',ppg:19.3,ast:4.6},
+    {name:'Lê Thanh Sơn',pos:'C',num:'#50',photo:'🦬',ppg:14.1,reb:9.8},
+    {name:'Bùi Hoàng Nam',pos:'PF',num:'#21',photo:'🦬',ppg:12.0,reb:6.5},
+    {name:'Vũ Minh Thành',pos:'PG',num:'#4',photo:'🦬',ppg:9.8,ast:5.2},
+  ]},
+  {id:'wings',league:'NBL Vietnam',name:'HCM City Wings',logo:'🦁',players:[
+    {name:'Lê Văn Mạnh',pos:'PG',num:'#1',photo:'🦁',ppg:17.2,ast:6.8},
+    {name:'Nguyễn Quốc Tuấn',pos:'SF',num:'#13',photo:'🦁',ppg:15.5,reb:5.0},
+    {name:'Phùng Đình Khoa',pos:'C',num:'#42',photo:'🦁',ppg:11.0,reb:9.2},
+  ]},
+  {id:'dragons',league:'NBL Vietnam',name:'Danang Dragons',logo:'🐉',players:[
+    {name:'Trần Thanh Liêm',pos:'PG',num:'#6',photo:'🐉',ppg:15.8,ast:7.1},
+    {name:'Đinh Ngọc Hải',pos:'SG',num:'#22',photo:'🐉',ppg:13.0,reb:3.8},
+    {name:'Cao Minh Phước',pos:'PF',num:'#33',photo:'🐉',ppg:10.5,reb:8.1},
+  ]},
+  {id:'lakers',league:'NBA',name:'LA Lakers',logo:'💛',players:[
+    {name:'LeBron James',pos:'SF',num:'#23',photo:'👑',ppg:26.8,ast:8.2},
+    {name:'Anthony Davis',pos:'C',num:'#3',photo:'🦾',ppg:24.1,reb:12.7},
+    {name:'Austin Reaves',pos:'SG',num:'#15',photo:'🎯',ppg:17.5,ast:4.8},
+    {name:'D\'Angelo Russell',pos:'PG',num:'#1',photo:'⚡',ppg:16.2,ast:6.3},
+  ]},
+  {id:'warriors_nba',league:'NBA',name:'Golden State Warriors',logo:'🌉',players:[
+    {name:'Stephen Curry',pos:'PG',num:'#30',photo:'🎯',ppg:29.5,ast:6.1},
+    {name:'Klay Thompson',pos:'SG',num:'#11',photo:'🔥',ppg:21.8,ast:2.4},
+    {name:'Draymond Green',pos:'PF',num:'#23',photo:'🛡️',ppg:8.5,ast:7.2},
+  ]},
+  {id:'celtics',league:'NBA',name:'Boston Celtics',logo:'☘️',players:[
+    {name:'Jayson Tatum',pos:'SF',num:'#0',photo:'⭐',ppg:28.2,ast:4.9},
+    {name:'Jaylen Brown',pos:'SG',num:'#7',photo:'🦅',ppg:24.6,reb:5.5},
+    {name:'Kristaps Porziņģis',pos:'C',num:'#8',photo:'🦒',ppg:18.1,reb:7.2},
+  ]},
+  {id:'realmadrid',league:'EuroLeague',name:'Real Madrid',logo:'🏰',players:[
+    {name:'Sergio Llull',pos:'PG',num:'#23',photo:'🏰',ppg:14.2,ast:5.8},
+    {name:'Nikola Mirotic',pos:'PF',num:'#11',photo:'⭐',ppg:22.3,reb:8.1},
+    {name:'Walter Tavares',pos:'C',num:'#22',photo:'🗼',ppg:10.5,reb:9.8},
+  ]},
+  {id:'barcelona',league:'EuroLeague',name:'Barcelona Basquet',logo:'🔴',players:[
+    {name:'Cory Higgins',pos:'SG',num:'#13',photo:'🇺🇸',ppg:16.8,ast:3.4},
+    {name:'Jan Vesely',pos:'C',num:'#24',photo:'🇨🇿',ppg:11.2,reb:8.5},
+    {name:'Alex Abrines',pos:'SF',num:'#6',photo:'🇪🇸',ppg:12.5,ast:2.1},
+  ]},
+];
+
+// ═══════════════════════════════════════════════
+// STATE
+// ═══════════════════════════════════════════════
+let vLeague = 'all', vType = 'all';
+let nCat = 'all', nSearch = '';
+let gTopic = 'all', gLevel = 'all';
+let mLeague = 'all', mStatus = 'all';
+let activeTeamId = TEAMS[0].id;
+let teamLeagueFilter = 'all';
+
+// ═══════════════════════════════════════════════
+// NAVIGATION
+// ═══════════════════════════════════════════════
+function showPage(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('page-' + id).classList.add('active');
+  document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+  const map = {home:0,highlight:1,tintuc:2,huongdan:3,lichthidau:4,doihinh:5};
+  const links = document.querySelectorAll('.nav-links a');
+  if (links[map[id]]) links[map[id]].classList.add('active');
+  window.scrollTo(0, 0);
+  if (id === 'home') { renderHomeVideos(); renderHomeNews(); runCounters(); }
+  if (id === 'highlight') renderVideos();
+  if (id === 'tintuc') renderNews();
+  if (id === 'huongdan') renderGuides();
+  if (id === 'lichthidau') renderMatches();
+  if (id === 'doihinh') renderTeams();
+}
+
+// ═══════════════════════════════════════════════
+// RENDER HELPERS
+// ═══════════════════════════════════════════════
+function ph(icon, label) {
+  return `<div class="ph">${icon}<span>${label}</span></div>`;
+}
+function playBtn() {
+  return `<div class="vplay"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="11" fill="rgba(255,107,0,.9)"/><polygon points="10,8 17,12 10,16" fill="white"/></svg></div>`;
+}
+
+// ═══════════════════════════════════════════════
+// VIDEOS
+// ═══════════════════════════════════════════════
+function renderHomeVideos() {
+  const el = document.getElementById('homeVideos');
+  el.innerHTML = VIDEOS.slice(0,3).map(v => videoCard(v)).join('');
+  bindLikes(el);
+}
+function renderVideos() {
+  const el = document.getElementById('allVideos');
+  let list = VIDEOS;
+  if (vLeague !== 'all') list = list.filter(v => v.league === vLeague);
+  if (vType !== 'all') list = list.filter(v => v.type === vType);
+  el.innerHTML = list.length ? list.map(v => videoCard(v)).join('') : '<p style="color:var(--lg);padding:2rem">Không có video phù hợp.</p>';
+  bindLikes(el);
+}
+function videoCard(v) {
+  return `<div class="vcard" onclick="void(0)">
+    <div class="vthumb">${ph(v.icon,v.league)}${playBtn()}<span class="vdur">${v.dur}</span><span class="vbadge">${v.badge}</span></div>
+    <div class="vinfo">
+      <p class="vtitle">${v.title}</p>
+      <div class="vmeta"><span>${v.league} · ${v.date}</span><span class="vlike" data-likes="${v.likes}">❤ <span class="lc">${v.likes}</span></span></div>
+    </div>
+  </div>`;
+}
+function filterVideos() {
+  vLeague = document.getElementById('vFilterLeague').value;
+  renderVideos();
+}
+function bindLikes(container) {
+  container.querySelectorAll('.vlike').forEach(el => {
+    el.onclick = e => {
+      e.stopPropagation();
+      el.classList.toggle('on');
+      const lc = el.querySelector('.lc');
+      const n = parseInt(el.dataset.likes);
+      lc.textContent = el.classList.contains('on') ? n+1 : n;
+    };
+  });
+}
+// Chip filter for videos
+document.getElementById('vFilterType').querySelectorAll('.chip').forEach(c => {
+  c.onclick = () => {
+    document.getElementById('vFilterType').querySelectorAll('.chip').forEach(x => x.classList.remove('on'));
+    c.classList.add('on');
+    vType = c.dataset.v;
+    renderVideos();
+  };
+});
+
+// ═══════════════════════════════════════════════
+// NEWS
+// ═══════════════════════════════════════════════
+function renderHomeNews() {
+  const el = document.getElementById('homeNews');
+  el.innerHTML = NEWS.slice(0,3).map(n => newsCard(n)).join('');
+}
+function renderNews() {
+  const el = document.getElementById('allNews');
+  let list = NEWS;
+  if (nCat !== 'all') list = list.filter(n => n.cat === nCat);
+  if (nSearch.trim()) list = list.filter(n => n.title.toLowerCase().includes(nSearch.toLowerCase()));
+  el.innerHTML = list.length ? list.map(n => newsCard(n)).join('') : '<p style="color:var(--lg);padding:2rem">Không có bài viết phù hợp.</p>';
+}
+function newsCard(n) {
+  return `<div class="ncard" onclick="openArticle(${n.id})">
+    <div class="nthumb">${ph(n.icon,n.cat)}</div>
+    <div class="nbody">
+      <div class="ncat">${n.cat}</div>
+      <h3 class="ntitle">${n.title}</h3>
+      <p class="nexc">${n.exc}</p>
+      <div class="nfoot"><span>📅 ${n.date}</span><span style="color:var(--or);font-size:.8rem">Đọc tiếp →</span></div>
+    </div>
+  </div>`;
+}
+function filterNews() {
+  nSearch = document.getElementById('newsSearch').value;
+  renderNews();
+}
+document.getElementById('newsChips').querySelectorAll('.chip').forEach(c => {
+  c.onclick = () => {
+    document.getElementById('newsChips').querySelectorAll('.chip').forEach(x => x.classList.remove('on'));
+    c.classList.add('on');
+    nCat = c.dataset.n;
+    renderNews();
+  };
+});
+function openArticle(id) {
+  const item = NEWS.find(n => n.id === id);
+  if (!item) return;
+  document.getElementById('mCat').textContent = item.cat;
+  document.getElementById('mTitle').textContent = item.title;
+  document.getElementById('mMeta').innerHTML = `<span>📅 ${item.date}</span><span>${item.cat}</span>`;
+  document.getElementById('mThumb').innerHTML = `${item.icon}<span>${item.cat}</span>`;
+  document.getElementById('mBody').innerHTML = item.body;
+  document.getElementById('articleModal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeModal() {
+  document.getElementById('articleModal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+document.getElementById('articleModal').addEventListener('click', e => {
+  if (e.target === document.getElementById('articleModal')) closeModal();
+});
+
+// ═══════════════════════════════════════════════
+// GUIDES
+// ═══════════════════════════════════════════════
+function renderGuides() {
+  const el = document.getElementById('allGuides');
+  let list = GUIDES;
+  if (gTopic !== 'all') list = list.filter(g => g.topic === gTopic);
+  if (gLevel !== 'all') list = list.filter(g => g.level === gLevel);
+  el.innerHTML = list.length ? list.map(g => guideCard(g)).join('') : '<p style="color:var(--lg);padding:2rem">Không có bài hướng dẫn phù hợp.</p>';
+}
+function guideCard(g) {
+  const lvlMap = {basic:{cls:'lv-b',lbl:'Cơ bản'},medium:{cls:'lv-m',lbl:'Trung bình'},advanced:{cls:'lv-a',lbl:'Nâng cao'}};
+  const lv = lvlMap[g.level];
+  return `<div class="gcard" onclick="openGuide(${g.id})">
+    <div class="gthumb">${ph(g.icon,g.topic)}<span class="glvl ${lv.cls}">${lv.lbl}</span></div>
+    <div class="ginfo">
+      <h3 class="gtitle">${g.title}</h3>
+      <p class="gdesc">${g.desc}</p>
+      <div class="gfoot"><span>⏱ ${g.dur}</span><span style="color:var(--or);font-size:.8rem">Xem bài →</span></div>
+    </div>
+  </div>`;
+}
+function filterGuides() {
+  gTopic = document.getElementById('gFilterTopic').value;
+  renderGuides();
+}
+document.getElementById('gFilterLevel').querySelectorAll('.chip').forEach(c => {
+  c.onclick = () => {
+    document.getElementById('gFilterLevel').querySelectorAll('.chip').forEach(x => x.classList.remove('on'));
+    c.classList.add('on');
+    gLevel = c.dataset.g;
+    renderGuides();
+  };
+});
+function openGuide(id) {
+  const item = GUIDES.find(g => g.id === id);
+  if (!item) return;
+  const lvlMap = {basic:'🟢 Cơ bản',medium:'🟡 Trung bình',advanced:'🔴 Nâng cao'};
+  document.getElementById('mCat').textContent = item.topic + ' · ' + lvlMap[item.level];
+  document.getElementById('mTitle').textContent = item.title;
+  document.getElementById('mMeta').innerHTML = `<span>⏱ ${item.dur}</span><span>${item.topic}</span>`;
+  document.getElementById('mThumb').innerHTML = `${item.icon}<span>${item.topic}</span>`;
+  document.getElementById('mBody').innerHTML = item.body;
+  document.getElementById('articleModal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+// ═══════════════════════════════════════════════
+// MATCHES
+// ═══════════════════════════════════════════════
+function renderMatches() {
+  const container = document.getElementById('matchContainer');
+  let list = MATCHES;
+  if (mLeague !== 'all') list = list.filter(m => m.league === mLeague);
+  if (mStatus !== 'all') list = list.filter(m => m.status === mStatus);
+  if (!list.length) { container.innerHTML = '<p style="color:var(--lg);padding:2rem">Không có trận đấu phù hợp.</p>'; return; }
+  const groups = {live:'🔴 Đang diễn ra',today:'📅 Hôm nay – 21/10/2026',result:'✅ Kết quả – 20/10/2026',upcoming:'🗓️ Sắp diễn ra'};
+  let html = '';
+  ['live','today','result','upcoming'].forEach(st => {
+    const grp = list.filter(m => m.status === st);
+    if (!grp.length) return;
+    html += `<div class="dhead">${groups[st]}</div><div class="mlist">`;
+    grp.forEach(m => {
+      const isLive = m.status === 'live';
+      html += `<div class="mcard${isLive?' live':''}" id="mc-${m.id}">
+        <div class="team">${teamBlock(m.home,false)}</div>
+        <div class="sc-center">
+          <div class="score${m.status==='result'?' style="color:var(--or)"':''}">${m.score}</div>
+          ${isLive?`<span class="live-b">LIVE</span>`:''}
+          <div class="mtime">${m.time}</div>
+          <div class="mtime" style="color:var(--lg);font-size:.7rem">${m.league}</div>
+          ${m.quarters?`<button class="btn-dt" onclick="toggleDetail(${m.id})">Mở rộng chi tiết</button>`:''}
+        </div>
+        <div class="team aw">${teamBlock(m.away,true)}</div>
+        ${m.quarters?`<div class="mdetail" id="md-${m.id}">${quarterTable(m)}</div>`:''}
+      </div>`;
+    });
+    html += '</div>';
+  });
+  container.innerHTML = html;
+}
+function teamBlock(t, away) {
+  return `${away?`<div><div class="tname">${t.name}</div><div class="tleague"></div></div>`:''}
+    <div class="tlogo">${t.logo}</div>
+    ${!away?`<div><div class="tname">${t.name}</div><div class="tleague"></div></div>`:''}`;
+}
+function quarterTable(m) {
+  const labels = ['','Q1','Q2','Q3','Q4','Tổng'];
+  const hTot = m.quarters.h.reduce((a,b)=>typeof b==='number'?a+b:a,0);
+  const aTot = m.quarters.a.reduce((a,b)=>typeof b==='number'?a+b:a,0);
+  return `<div class="qrow">${labels.map(l=>`<div class="qlbl">${l}</div>`).join('')}</div>
+    <div class="qrow" style="margin-top:.3rem;color:var(--wh)">
+      <div style="font-weight:700;text-align:left">${m.home.name.split(' ').pop()}</div>
+      ${m.quarters.h.map(q=>`<div class="qval">${q}</div>`).join('')}
+      <div class="qval" style="color:var(--or)">${hTot}</div>
+    </div>
+    <div class="qrow" style="margin-top:.2rem;color:var(--lg)">
+      <div style="text-align:left">${m.away.name.split(' ').pop()}</div>
+      ${m.quarters.a.map(q=>`<div class="qval">${q}</div>`).join('')}
+      <div class="qval">${aTot}</div>
+    </div>`;
+}
+function toggleDetail(id) {
+  const d = document.getElementById('md-'+id);
+  const b = document.querySelector(`#mc-${id} .btn-dt`);
+  if (!d) return;
+  const open = d.style.display === 'block';
+  d.style.display = open ? 'none' : 'block';
+  b.textContent = open ? 'Mở rộng chi tiết' : 'Thu gọn';
+}
+document.getElementById('mFilterStatus').querySelectorAll('.chip').forEach(c => {
+  c.onclick = () => {
+    document.getElementById('mFilterStatus').querySelectorAll('.chip').forEach(x => x.classList.remove('on'));
+    c.classList.add('on');
+    mStatus = c.dataset.m;
+    renderMatches();
+  };
+});
+document.getElementById('mFilterLeague').addEventListener('change', e => {
+  mLeague = e.target.value;
+  renderMatches();
+});
+
+// ═══════════════════════════════════════════════
+// TEAMS
+// ═══════════════════════════════════════════════
+function filterTeamsByLeague() {
+  teamLeagueFilter = document.getElementById('teamLeagueFilter').value;
+  const filtered = teamLeagueFilter === 'all' ? TEAMS : TEAMS.filter(t => t.league === teamLeagueFilter);
+  activeTeamId = filtered.length ? filtered[0].id : null;
+  renderTeams();
+}
+function renderTeams() {
+  const filtered = teamLeagueFilter === 'all' ? TEAMS : TEAMS.filter(t => t.league === teamLeagueFilter);
+  if (!filtered.length) {
+    document.getElementById('teamTabs').innerHTML = '';
+    document.getElementById('rosterContainer').innerHTML = '<p style="color:var(--lg);padding:2rem">Không có đội.</p>';
+    return;
+  }
+  if (!filtered.find(t => t.id === activeTeamId)) activeTeamId = filtered[0].id;
+  document.getElementById('teamTabs').innerHTML = filtered.map(t =>
+    `<button class="ttab${t.id===activeTeamId?' on':''}" onclick="selectTeam('${t.id}')">${t.logo} ${t.name}</button>`
+  ).join('');
+  const team = TEAMS.find(t => t.id === activeTeamId);
+  document.getElementById('rosterContainer').innerHTML = `<div class="pgrid">${team.players.map(p => {
+    const stat2 = p.ast !== undefined ? `${p.ast} AST` : `${p.reb} REB`;
+    return `<div class="pcard">
+      <div class="pphoto">${p.photo}</div>
+      <div class="pname">${p.name}</div>
+      <div class="ppos">${p.pos} · ${p.num}</div>
+      <div class="pstats"><span>${p.ppg} PPG</span><span>${stat2}</span></div>
+    </div>`;
+  }).join('')}</div>`;
+}
+function selectTeam(id) {
+  activeTeamId = id;
+  renderTeams();
+}
+
+// ═══════════════════════════════════════════════
+// COUNTER ANIMATION
+// ═══════════════════════════════════════════════
+function runCounters() {
+  document.querySelectorAll('[data-count]').forEach(el => {
+    const target = parseInt(el.dataset.count);
+    let cur = 0;
+    const step = Math.ceil(target / 50);
+    const t = setInterval(() => {
+      cur = Math.min(cur + step, target);
+      el.textContent = cur.toLocaleString('vi-VN');
+      if (cur >= target) clearInterval(t);
+    }, 20);
+  });
+}
+
+// ═══════════════════════════════════════════════
+// INIT
+// ═══════════════════════════════════════════════
+showPage('home');
+</script>
+</body>
+</html>
+
